@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import Alert from 'react-bootstrap/Alert'
 import './ContactForm.css';
 
 export default class ContactForm extends Component {
@@ -10,7 +11,8 @@ export default class ContactForm extends Component {
         this.state = {
             name: "",
             email: "",
-            message: ""
+            message: "",
+            showSuccess: false
         };
     }
 
@@ -40,11 +42,18 @@ export default class ContactForm extends Component {
 
     submit = (e) => {
         console.log(this.state);
+        this.setState({
+            ...this.state,
+            showSuccess: true
+        })
     };
 
     render = () => {
         return (
             <div id="contact-form">
+                <Alert variant="success" show={this.state.showSuccess}>
+                    Your contact request was received! We will reply back shortly.
+                </Alert>
                 <Form>
                     <Form.Group controlId="name">
                         <Form.Label>Name:</Form.Label>
